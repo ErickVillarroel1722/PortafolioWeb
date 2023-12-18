@@ -18,3 +18,18 @@ router.put('/portafolio/edit/:id', updatePortafolio)
 router.delete('/portafolio/delete/:id', deletePortafolio)
 
 module.exports = router
+//RUTAS PROTEGIDAS
+const {isAuthenticated} = require('../helpers/validate-auth')
+
+
+
+router.get('/portafolio/add',isAuthenticated,renderPortafolioForm)
+router.post('/portafolio/add', isAuthenticated,createNewPortafolio)
+
+router.get('/portafolios',isAuthenticated,renderAllPortafolios)
+router.get('/portafolio/:id', isAuthenticated,renderPortafolio)
+    
+router.get('/portafolio/edit/:id', isAuthenticated,renderEditPortafolioForm)
+router.put('/portafolio/edit/:id', isAuthenticated,updatePortafolio)
+
+router.delete('/portafolio/delete/:id', isAuthenticated,deletePortafolio)

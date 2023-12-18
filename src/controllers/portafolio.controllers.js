@@ -2,8 +2,8 @@
 const Portfolio = require('../models/Portafolio')
 
 
-const renderAllPortafolios = async (req,res)=>{
-    const portfolios = await Portfolio.find().lean()
+const renderAllPortafolios = async(req,res)=>{
+    const portfolios = await Portfolio.find({user:req.user._id}).lean()
     res.render("portafolio/allPortfolios",{portfolios})
 }
 
@@ -17,27 +17,33 @@ const renderPortafolioForm = (req,res)=>{
     res.render('portafolio/newFormPortafolio')
 }
 //PARA GUARDAR EL FORM
-const createNewPortafolio =async(req,res)=>{
+const createNewPortafolio =async (req,res)=>{
+
     const {title, category,description} = req.body
     const newPortfolio = new Portfolio({title,category,description})
+    newPortfolio.user = req.user._id
     await newPortfolio.save()
-    res.json({newPortfolio})
+    res.redirect('/portafolios')
 }
 
 
-const renderEditPortafolioForm = (req,res)=>{
-    res.send('Formulario para editar un portafolio')
+const renderEditPortafolioForm =async(req,res)=>{
+    const portfolio = await Portfolio.findById(req.params.id).lean()
+    res.render('portafolio/editPortfolio',{portfolio})
 }
 
-
-
-const updatePortafolio = (req,res)=>{
-    res.send('Editar un portafolio')
+const updatePortafolio = async(req,res)=>{
+    const portfolio = await Portfolio.findById(req.params.id).lean()
+    if(!(portfolio.user.toString() !== req.user._id.toString())) return res.redirect('/portafolios')
+    const {title,category,description}= req.body
+    await Portfolio.findByIdAndUpdate(req.params.id,{title,category,description})
+    res.redirect('/portafolios')
 }
-const deletePortafolio = (req,res)=>{
-    res.send('Eliminar un nuevo portafolio')
-}
 
+const deletePortafolio = async(req,res)=>{
+    await Portfolio.findByIdAndDelete(req.params.id)
+    res.redirect('/portafolios')
+}
 
 module.exports ={
     renderAllPortafolios,
