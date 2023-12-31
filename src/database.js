@@ -9,7 +9,7 @@ const MONGODB_URI = 'mongodb://localhost:27017'
 
 connection = async()=>{
     try {
-         await mongoose.connect(MONGODB_URI)
+         await mongoose.connect(process.env.ATLAS_URI)
         console.log("Database is connected")
     } catch (error) {
         console.log(error);

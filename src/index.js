@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 //Importar la variable app
 const app = require('./server.js')
 //Importar el metodo conection/
