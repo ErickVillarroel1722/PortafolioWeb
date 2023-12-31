@@ -20,6 +20,9 @@ LOGIN
 PAGINA DE LOGIN UNICA Y CREACION DE PORTAFOLIOS
 ![image](https://github.com/ErickVillarroel1722/PortafolioWeb/assets/117743333/67f32b2d-a8d5-4f18-94bb-0f2cc8d55bed)
 
+Eliminar Portafolio: 
+![image](https://github.com/ErickVillarroel1722/PortafolioWeb/assets/117743333/fe2157dd-074e-4b7d-8488-71604d99b20e)
+
 
 
 
