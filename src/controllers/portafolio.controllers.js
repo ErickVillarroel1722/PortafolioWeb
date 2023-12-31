@@ -29,7 +29,6 @@ const createNewPortafolio =async (req,res)=>{
         public_id:imageUpload.public_id,
         secure_url:imageUpload.secure_url
     }
-    await fs.unlink(req.files.image.tempFilePath)
     await newPortfolio.save()
     res.redirect('/portafolios')
 }
