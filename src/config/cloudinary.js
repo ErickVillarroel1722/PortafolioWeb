@@ -7,6 +7,8 @@ cloudinary.config({
     secure: true
 });
 
+
+
 module.exports.uploadImage = async (filePath) => {
     try {
         const result = await cloudinary.uploader.upload(filePath, { folder: 'portafolio' });
@@ -16,3 +18,7 @@ module.exports.uploadImage = async (filePath) => {
         throw error;  // Lanza el error para que pueda ser manejado en el código que llama a esta función
     }
 };
+module.exports.deleteImage = async (publicId)=>{
+    
+    return await cloudinary.uploader.destroy(publicId)
+}

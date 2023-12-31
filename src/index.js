@@ -1,4 +1,6 @@
+//Esto corre el server UWU 
 require('dotenv').config()
+
 
 //Importar la variable app
 const app = require('./server.js')
